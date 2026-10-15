@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Friction Point Savings Calculator | Enwise Insights &amp; Advisory</title>
+<meta name="description" content="Free calculator that estimates the annual savings from fixing friction points in B2B SaaS client onboarding and implementation delivery. By Enwise Insights &amp; Advisory.">
+</head>
+<body style="margin:0;padding:2rem 1rem;">
+<!-- Calculator widget: for WordPress, paste everything between the START and END markers into a Custom HTML block -->
+<!-- START -->
+<div id="enwise-calc-root" class="enwise-calc">
+  <style>
+    .enwise-calc {
+      --navy: #1F4E79;
+      --orange: #E8702A;
+      --navy-light: #EAF1F7;
+      --border: #DCE3E9;
+      --text: #1C2B36;
+      --muted: #5B6B77;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      max-width: 760px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+    .enwise-calc * { box-sizing: border-box; }
+    .enwise-calc h2 {
+      font-size: 1.5rem;
+      margin: 0 0 0.25rem;
+      color: var(--navy);
+    }
+    .enwise-calc .subtitle {
+      color: var(--muted);
+      margin: 0 0 1.5rem;
+      font-size: 0.95rem;
+    }
+    .enwise-calc .step-label {
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--orange);
+      margin: 1.75rem 0 0.75rem;
+    }
+    .enwise-calc .fp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .enwise-calc .fp-stage {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--orange);
+      margin-bottom: 0.3rem;
+    }
+    .enwise-calc .fp-card {
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      cursor: pointer;
+      background: #fff;
+      transition: border-color 0.15s, background 0.15s;
+      position: relative;
+    }
+    .enwise-calc .fp-card:hover { border-color: var(--orange); }
+    .enwise-calc .fp-card.selected {
+      border-color: var(--orange);
+      background: #FFF6EF;
+    }
+    .enwise-calc .fp-card.locked {
+      cursor: default;
+      opacity: 0.55;
+      background: #F5F7F9;
+    }
+    .enwise-calc .fp-card.locked:hover { border-color: var(--border); }
+    .enwise-calc .fp-card.more-card {
+      border-style: dashed;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      background: #FAFBFC;
+    }
+    .enwise-calc .fp-card.more-card:hover { border-color: var(--orange); background: #FFF6EF; }
+    .enwise-calc .fp-title { font-weight: 600; font-size: 0.95rem; margin: 0 0 0.2rem; }
+    .enwise-calc .fp-desc { font-size: 0.82rem; color: var(--muted); margin: 0; }
+    .enwise-calc .fp-badge {
+      position: absolute; top: 0.6rem; right: 0.7rem;
+      font-size: 0.68rem; font-weight: 600; text-transform: uppercase;
+      color: var(--muted);
+      background: #E9EDF0; padding: 0.15rem 0.4rem; border-radius: 4px;
+    }
+    .enwise-calc .fp-check {
+      position: absolute; top: 0.6rem; right: 0.7rem;
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid var(--border); background: #fff;
+    }
+    .enwise-calc .fp-card.selected .fp-check {
+      border-color: var(--orange); background: var(--orange);
+    }
+    .enwise-calc .limit-note {
+      font-size: 0.82rem; color: var(--muted); margin-top: 0.6rem;
+    }
+    .enwise-calc .detail-block {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 0.85rem;
+    }
+    .enwise-calc .detail-block h4 {
+      margin: 0 0 0.2rem; font-size: 0.95rem; color: var(--navy);
+    }
+    .enwise-calc .detail-subtitle {
+      margin: 0 0 0.8rem; font-size: 0.82rem; color: var(--muted); font-style: italic;
+    }
+    .enwise-calc .field-row {
+      display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start;
+    }
+    .enwise-calc .field {
+      flex: 1 1 200px;
+    }
+    .enwise-calc label {
+      display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 0.3rem;
+    }
+    .enwise-calc .detail-block label {
+      min-height: 2.4em;
+    }
+    .enwise-calc .field-hint {
+      font-size: 0.72rem; color: var(--muted); margin: 0.3rem 0 0; font-style: italic;
+    }
+    .enwise-calc input[type="number"] {
+      width: 100%; padding: 0.5rem 0.6rem; border: 1px solid var(--border);
+      border-radius: 6px; font-size: 0.95rem;
+    }
+    .enwise-calc .pct-options {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+    }
+    .enwise-calc .pct-btn {
+      border: 1px solid var(--border); background: #fff; border-radius: 20px;
+      padding: 0.35rem 0.85rem; font-size: 0.85rem; cursor: pointer;
+      color: var(--text);
+    }
+    .enwise-calc .pct-btn.active {
+      background: var(--navy); border-color: var(--navy); color: #fff;
+    }
+    .enwise-calc .rate-block {
+      background: var(--navy-light); border-radius: 10px; padding: 1rem 1.1rem; margin: 1rem 0;
+    }
+    .enwise-calc .calc-btn {
+      background: var(--orange); color: #fff; border: none; border-radius: 8px;
+      padding: 0.8rem 1.6rem; font-size: 1rem; font-weight: 600; cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    .enwise-calc .calc-btn:disabled { background: #C9CFD4; cursor: not-allowed; }
+    .enwise-calc .calc-btn.secondary {
+      background: transparent; color: var(--navy); border: 1px solid var(--navy);
+    }
+    .enwise-calc .results {
+      display: none;
+      margin-top: 1.75rem;
+      border-top: 2px solid var(--border);
+      padding-top: 1.5rem;
+    }
+    .enwise-calc .results.visible { display: block; }
+    .enwise-calc .total-figure {
+      font-size: 2.4rem; font-weight: 700; color: var(--navy); margin: 0;
+    }
+    .enwise-calc .total-label {
+      color: var(--muted); font-size: 0.9rem; margin: 0 0 1rem;
+    }
+    .enwise-calc .breakdown-row {
+      display: flex; justify-content: space-between; padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .enwise-calc .breakdown-row:last-child { border-bottom: none; }
+    .enwise-calc .cta-block {
+      display: block;
+      background: var(--navy); color: #fff; border-radius: 10px;
+      padding: 1.25rem 1.4rem; margin-top: 1.5rem;
+    }
+    .enwise-calc .cta-block h4 { margin: 0 0 0.4rem; }
+    .enwise-calc .cta-block p { margin: 0 0 0.9rem; font-size: 0.9rem; opacity: 0.9; }
+    .enwise-calc .disclaimer {
+      font-size: 0.75rem; color: var(--muted); margin-top: 1.5rem;
+    }
+  </style>
+
+  <h2>What's the value of improving your customer journey?</h2>
+  <p class="subtitle">Select up to three, and see the annual savings each change could deliver — no sign-up needed, more savings are ready to be unlocked, get in touch.</p>
+
+  <div class="step-label">Step 1 — Pick up to 3</div>
+  <div class="fp-grid" id="fp-grid"></div>
+  <p class="limit-note" id="limit-note"></p>
+
+  <div id="detail-section" style="display:none;">
+    <div class="step-label">Step 2 — A bit more detail</div>
+    <div id="detail-blocks"></div>
+
+    <div class="rate-block">
+      <div class="field-row">
+        <div class="field">
+          <label for="daily-rate">Average day rate for the people doing this work (£)</label>
+          <input type="number" id="daily-rate" min="0" step="10" placeholder="e.g. 450" />
+        </div>
+        <div class="field">
+          <label for="projects-per-year">How many of these projects do you run a year?</label>
+          <input type="number" id="projects-per-year" min="0" step="1" placeholder="e.g. 20" />
+        </div>
+      </div>
+    </div>
+
+    <button class="calc-btn" id="calc-button" disabled>Show me the number</button>
+  </div>
+
+  <div class="results" id="results">
+    <p class="total-label">What fixing these could save you, per year</p>
+    <p class="total-figure" id="total-figure">£0</p>
+    <div id="breakdown"></div>
+  </div>
+
+  <div class="cta-block" id="contact-section">
+    <h4>This is a rough ROI estimate</h4>
+    <p>We can help you turn it into a full, defensible business case, and help you scale your PS organisation.</p>
+    <a class="calc-btn secondary" style="background:#fff; display:inline-block; text-decoration:none;" href="https://enwiseinsight.com/contact-us/" target="_blank" rel="noopener">Get in touch</a>
+  </div>
+
+  <p class="disclaimer">These are ballpark figures based on patterns we typically see in B2B SaaS delivery, not a promise of savings for your organisation specifically. Your numbers stay in your browser: this open-source version does not store or send anything unless you configure the optional webhook.</p>
+</div>
+
+<script>
+(function () {
+  // ---- FRICTION POINT LIBRARY -------------------------------------------
+  // Each friction point sits within a delivery journey stage, and its %
+  // savings apply to the effort of that specific activity (e.g. fixing
+  // SOW process cuts SOW-writing time by X%) — NOT to the whole project.
+  // activityLabel drives the hours-input question so scope stays clear.
+  // Every title/desc below is a first draft — reword freely.
+  var frictionPoints = [
+    {
+      id: "handover",
+      stage: "Handover",
+      title: "Reduce re-scoping after handover",
+      subtitle: "by aligning what sales promised with what delivery can execute",
+      desc: "A structured handover process ensures what was sold matches what delivery can execute, reducing the need to re-scope projects after handover.",
+      activityLabel: "re-scoping projects after a poor handover",
+      pct: [10, 20, 40],
+      locked: false
+    },
+    {
+      id: "scopedocs",
+      stage: "Handover",
+      title: "Reduce bespoke development efforts",
+      subtitle: "by using well-defined scope documents during the sale cycle",
+      desc: "Well-defined solution and scope documents included in sales materials reduce custom and bespoke development efforts and subsequent scope creep.",
+      activityLabel: "reframing the scope or working on committed capabilities that are not supported",
+      pct: [20, 40, 60],
+      locked: false
+    },
+    {
+      id: "sow",
+      stage: "Scoping",
+      title: "Standardise project effort estimates",
+      subtitle: "by drawing on a repository of standard effort estimates when creating the SOW",
+      desc: "A repository of standard effort estimates, used when creating the initial SOW for a project, both reduces the effort to create the SOW and facilitates a trustworthy project plan.",
+      activityLabel: "producing SOWs",
+      pct: [30, 60, 80],
+      locked: false
+    },
+    {
+      id: "planning",
+      stage: "Planning",
+      title: "Eliminate redundant effort in creating project plans",
+      subtitle: "by starting from a reusable project plan template",
+      desc: "Project templates reduce the manual effort associated with creating plans and shorten the time to start the project.",
+      activityLabel: "writing project plans",
+      pct: [30, 60, 80],
+      locked: false
+    },
+    {
+      id: "readiness",
+      stage: "Planning",
+      title: "Reduce kickoff delays from client readiness",
+      subtitle: "by agreeing clear readiness criteria before kickoff",
+      desc: "Clear readiness criteria and expectations, agreed before kickoff, reduce delays caused by clients being unprepared or unclear on their responsibilities.",
+      activityLabel: "handling delays caused by client readiness at kickoff",
+      pct: [10, 20, 30],
+      locked: false
+    },
+    {
+      id: "reviewcycles",
+      stage: "Delivery",
+      title: "Increase confidence in client sign-off",
+      subtitle: "by running early, frequent show-and-tells instead of one late review",
+      desc: "Early and frequent show-and-tell sessions, rather than one late high-stakes review, reduce the rework caused by late-stage surprises at sign-off.",
+      activityLabel: "reworking deliverables after late-stage sign-off surprises",
+      pct: [20, 40, 60],
+      locked: false
+    },
+    {
+      id: "rework",
+      stage: "Delivery",
+      title: "Reduce rework caused by scope creep",
+      subtitle: "by clearly defining scope and requirements upfront",
+      desc: "Clearly defined scope and requirements reduce the rework caused by ambiguity or missed requirements during delivery.",
+      activityLabel: "rework caused by scope creep",
+      pct: [20, 40, 60],
+      locked: false
+    },
+    {
+      id: "admin",
+      stage: "Ongoing",
+      title: "Reduce manual admin and reporting effort",
+      subtitle: "by automating timesheets, status updates and dashboards",
+      desc: "Automated timesheets, status updates and dashboards reduce the manual effort spent on administration and reporting.",
+      activityLabel: "admin and reporting",
+      pct: [30, 60, 80],
+      locked: false
+    },
+    {
+      id: "tools",
+      stage: "Ongoing",
+      title: "Consolidate fragmented delivery tools",
+      subtitle: "by moving to a single connected toolset",
+      desc: "A single connected toolset reduces the admin overhead and data inconsistencies caused by multiple disconnected tools.",
+      activityLabel: "admin overhead from fragmented tools",
+      pct: [10, 20, 40],
+      locked: false
+    }
+  ];
+
+  // ---- SAVE-TO-SHEET WEBHOOK -----------------------------------------
+  // Every "Calculate" click posts the on-screen data (no name/email —
+  // still anonymous at this stage) to this Apps Script Web App, which
+  // appends a row to your Google Sheet. SHARED_SECRET is a basic filter
+  // against blind bots hitting the URL directly — not real security,
+  // just cheap noise reduction. Must match the check in the Apps Script.
+  var WEBHOOK_URL = ""; // optional: your own Apps Script Web App URL. Leave empty to disable logging
+  var SHARED_SECRET = ""; // optional: must match the check in your Apps Script
+
+  var MAX_SELECT = 3;
+  var selected = [];      // ordered array of friction point ids
+  var fpState = {};        // id -> { pct, hours }
+
+  var grid = document.getElementById("fp-grid");
+  var limitNote = document.getElementById("limit-note");
+  var detailSection = document.getElementById("detail-section");
+  var detailBlocks = document.getElementById("detail-blocks");
+  var calcButton = document.getElementById("calc-button");
+  var results = document.getElementById("results");
+  var totalFigure = document.getElementById("total-figure");
+  var breakdownEl = document.getElementById("breakdown");
+  var dailyRateInput = document.getElementById("daily-rate");
+  var projectsPerYearInput = document.getElementById("projects-per-year");
+  var contactSection = document.getElementById("contact-section");
+
+  function formatGBP(n) {
+    return "£" + Math.round(n).toLocaleString("en-GB");
+  }
+
+  // The contact box is always visible now — this just scrolls to it,
+  // used by the More card and after "Show me the number".
+  function revealContact() {
+    contactSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  function renderGrid() {
+    grid.innerHTML = "";
+    frictionPoints.forEach(function (fp) {
+      var card = document.createElement("div");
+      card.className = "fp-card" + (fp.locked ? " locked" : "") + (selected.indexOf(fp.id) > -1 ? " selected" : "");
+      card.innerHTML =
+        '<span class="fp-stage">' + fp.stage + '</span>' +
+        '<p class="fp-title">' + fp.title + '</p>' +
+        '<p class="fp-desc">' + fp.desc + '</p>' +
+        (fp.locked ? '<span class="fp-badge">Full diagnostic</span>' : '<span class="fp-check"></span>');
+      if (!fp.locked) {
+        card.addEventListener("click", function () { toggleSelect(fp.id); });
+      }
+      grid.appendChild(card);
+    });
+
+    // Static "More" card — always last, not part of the friction point
+    // library or the 3-pick limit. Skips straight to the contact form.
+    var moreCard = document.createElement("div");
+    moreCard.className = "fp-card more-card";
+    moreCard.innerHTML =
+      '<p class="fp-title">More savings</p>' +
+      '<p class="fp-desc">There\'s more where this came from — skip the calculator and just talk to us.</p>' +
+      '<span class="fp-badge">Full diagnostic</span>';
+    moreCard.addEventListener("click", revealContact);
+    grid.appendChild(moreCard);
+
+    limitNote.textContent = selected.length >= MAX_SELECT
+      ? "That's 3 picked — deselect one if you want to swap it out."
+      : "Pick up to 3 (" + selected.length + " so far).";
+  }
+
+  function toggleSelect(id) {
+    var idx = selected.indexOf(id);
+    if (idx > -1) {
+      selected.splice(idx, 1);
+      delete fpState[id];
+    } else {
+      if (selected.length >= MAX_SELECT) return;
+      selected.push(id);
+      fpState[id] = { pct: null, hours: null };
+    }
+    renderGrid();
+    renderDetails();
+  }
+
+  function renderDetails() {
+    if (selected.length === 0) {
+      detailSection.style.display = "none";
+      results.classList.remove("visible");
+      return;
+    }
+    detailSection.style.display = "block";
+    detailBlocks.innerHTML = "";
+    selected.forEach(function (id) {
+      var fp = frictionPoints.filter(function (f) { return f.id === id; })[0];
+      var block = document.createElement("div");
+      block.className = "detail-block";
+      var pctButtons = fp.pct.map(function (p) {
+        return '<button type="button" class="pct-btn" data-fp="' + id + '" data-pct="' + p + '">' + p + '%</button>';
+      }).join("");
+      block.innerHTML =
+        '<h4>' + fp.title + '</h4>' +
+        '<p class="detail-subtitle">' + fp.subtitle + '</p>' +
+        '<div class="field-row">' +
+          '<div class="field">' +
+            '<label>Hours per project on ' + fp.activityLabel + '</label>' +
+            '<input type="number" min="0" step="5" class="hours-input" data-fp="' + id + '" placeholder="e.g. 40" />' +
+            '<p class="field-hint">Total hours across everyone involved, not just one person\'s time</p>' +
+          '</div>' +
+          '<div class="field">' +
+            '<label>What\'s realistic once it\'s fixed?</label>' +
+            '<div class="pct-options">' + pctButtons + '</div>' +
+            '<p class="field-hint">Typical range for this kind of fix — go with whatever feels right for you</p>' +
+          '</div>' +
+        '</div>';
+      detailBlocks.appendChild(block);
+    });
+
+    // wire up pct buttons
+    detailBlocks.querySelectorAll(".pct-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-fp");
+        var pct = parseFloat(btn.getAttribute("data-pct"));
+        fpState[id].pct = pct;
+        detailBlocks.querySelectorAll('.pct-btn[data-fp="' + id + '"]').forEach(function (b) {
+          b.classList.toggle("active", b === btn);
+        });
+        checkReady();
+      });
+    });
+    // wire up hours inputs
+    detailBlocks.querySelectorAll(".hours-input").forEach(function (inp) {
+      inp.addEventListener("input", function () {
+        var id = inp.getAttribute("data-fp");
+        fpState[id].hours = parseFloat(inp.value) || null;
+        checkReady();
+      });
+    });
+    checkReady();
+  }
+
+  function checkReady() {
+    var rate = parseFloat(dailyRateInput.value);
+    var projectsPerYear = parseFloat(projectsPerYearInput.value);
+    var allFilled = selected.every(function (id) {
+      var s = fpState[id];
+      return s && s.pct && s.hours && s.hours > 0;
+    });
+    calcButton.disabled = !(allFilled && rate > 0 && projectsPerYear > 0);
+  }
+
+  dailyRateInput.addEventListener("input", checkReady);
+  projectsPerYearInput.addEventListener("input", checkReady);
+
+  calcButton.addEventListener("click", function () {
+    var rate = parseFloat(dailyRateInput.value);
+    var projectsPerYear = parseFloat(projectsPerYearInput.value);
+    var hourlyRate = rate / 8;
+    var total = 0;
+    breakdownEl.innerHTML = "";
+    selected.forEach(function (id) {
+      var fp = frictionPoints.filter(function (f) { return f.id === id; })[0];
+      var s = fpState[id];
+      var savingPerProject = s.hours * (s.pct / 100) * hourlyRate;
+      var savingPerYear = savingPerProject * projectsPerYear;
+      total += savingPerYear;
+      var row = document.createElement("div");
+      row.className = "breakdown-row";
+      row.innerHTML = "<span>" + fp.title + "</span><span>" + formatGBP(savingPerYear) + "</span>";
+      breakdownEl.appendChild(row);
+    });
+    totalFigure.textContent = formatGBP(total);
+    results.classList.add("visible");
+    results.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    revealContact();
+
+    // Fire-and-forget: log this calculation to the Sheet. Never blocks
+    // or errors the UI if it fails (offline, endpoint down, etc.).
+    if (WEBHOOK_URL) try {
+      var payload = {
+        secret: SHARED_SECRET,
+        frictionPoints: selected.map(function (id) {
+          var fp = frictionPoints.filter(function (f) { return f.id === id; })[0];
+          var s = fpState[id];
+          return { title: fp.title, hours: s.hours, pct: s.pct };
+        }),
+        dailyRate: rate,
+        projectsPerYear: projectsPerYear,
+        totalSavings: Math.round(total)
+      };
+      fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain" }, // avoids CORS preflight
+        body: JSON.stringify(payload)
+      }).catch(function () { /* silently ignore network errors */ });
+    } catch (err) { /* never let logging break the calculator */ }
+  });
+
+  renderGrid();
+})();
+</script>
+<!-- END -->
+</body>
+</html>
