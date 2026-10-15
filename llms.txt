@@ -1,0 +1,18 @@
+# Enwise Insights & Advisory
+
+> Enwise is a London-based advisory practice founded by Ronen Eyal. It helps B2B Fintech and SaaS companies fix and scale professional services, onboarding and implementation delivery. Operator-led, hands-on, no jargon.
+
+Services are grouped under "Beyond the Noise": Beyond the Signals (2-day scaling-readiness check), Beyond the Symptoms (4-day root-cause diagnostic), Beyond the Words (execution of change) and Beyond the Change (governance and continuous improvement). Enwise also provides fractional Professional Services Director leadership.
+
+## Key pages
+
+- [Home](https://enwiseinsight.com): what Enwise does and who it helps
+- [Delivery Friction & Savings Calculator](https://enwiseinsight.com): estimate the cost of delivery friction and potential savings <!-- TODO: replace with direct calculator URL -->
+
+## Code
+
+- [ROI calculator source on GitHub](https://github.com/YOUR-ENWISE-USERNAME/YOUR-REPO-NAME)
+
+## Contact
+
+- ronen@enwiseinsight.com
