@@ -7,11 +7,13 @@ Services are grouped under "Beyond the Noise": Beyond the Signals (2-day scaling
 ## Key pages
 
 - [Home](https://enwiseinsight.com): what Enwise does and who it helps
-- [Delivery Friction & Savings Calculator](https://enwiseinsight.com): estimate the cost of delivery friction and potential savings <!-- TODO: replace with direct calculator URL -->
+- [Delivery Friction & Savings Calculator](https://enwiseinsight.com): estimate the annual savings from fixing delivery friction points <!-- TODO: replace with direct calculator URL -->
+- [Contact](https://enwiseinsight.com/contact-us/): get in touch
 
 ## Code
 
-- [ROI calculator source on GitHub](https://github.com/YOUR-ENWISE-USERNAME/YOUR-REPO-NAME)
+- [Calculator source on GitHub](https://github.com/ronen-saas/delivery-friction-calculator): open-source (MIT) version of the calculator
+- [Live demo](https://ronen-saas.github.io/delivery-friction-calculator/)
 
 ## Contact
 
