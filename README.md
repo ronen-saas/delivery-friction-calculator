@@ -8,7 +8,7 @@ Built by [Enwise Insights & Advisory](https://enwiseinsight.com), a London-based
 
 **Live demo:** [ronen-saas.github.io/delivery-friction-calculator](https://ronen-saas.github.io/delivery-friction-calculator/)
 
-**On the Enwise website:** [enwiseinsight.com](https://enwiseinsight.com) <!-- TODO: replace with the direct calculator page URL -->
+**On the Enwise website:** [enwiseinsight.com/roi-calculator/](https://enwiseinsight.com/roi-calculator/)
 
 ## Why this exists
 

@@ -7,7 +7,7 @@ Services are grouped under "Beyond the Noise": Beyond the Signals (2-day scaling
 ## Key pages
 
 - [Home](https://enwiseinsight.com): what Enwise does and who it helps
-- [Delivery Friction & Savings Calculator](https://enwiseinsight.com): estimate the annual savings from fixing delivery friction points <!-- TODO: replace with direct calculator URL -->
+- [Delivery Friction & Savings Calculator](https://enwiseinsight.com/roi-calculator/): estimate the annual savings from fixing delivery friction points
 - [Contact](https://enwiseinsight.com/contact-us/): get in touch
 
 ## Code
